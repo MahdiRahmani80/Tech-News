@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/discover"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:text="Discover"
+        android:textSize="30dp"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/DarkBlue"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/hintDiscover"
+        android:layout_below="@+id/discover"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="30dp"
+        android:text="TecNews, find the newest news about TECHNOLOGY"
+        android:textSize="14dp"
+        android:fontFamily="@font/roboto_light"
+        android:textColor="@color/DarkBlue"/>
+
+</RelativeLayout>
