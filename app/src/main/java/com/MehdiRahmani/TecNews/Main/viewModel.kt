@@ -1,31 +1,36 @@
 package com.MehdiRahmani.TecNews.Main
 
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.MehdiRahmani.TecNews.Home.HomeFragment
 import java.util.*
 import kotlin.concurrent.schedule
 
-class MainViewModel(main:MainActivity) {
+class MainViewModel : ViewModel() {
 
-    var main:MainActivity? = null
-    init {
-        this.main=main
-    }
-
-    fun makeFragment(){
-        main?.updateFragment(splash())
-
-        Timer().schedule(2000){
-            main?.updateFragment(home())
+    private val fr: MutableLiveData<Fragment> by lazy {
+        MutableLiveData<Fragment>().also {
+            loadFragment()
         }
     }
 
-    fun splash(): SplashFragment {
-        return SplashFragment()
+    private var fragment_state:Fragment? = null
+
+    fun makeFragment(): MutableLiveData<Fragment> {
+        fr.postValue(fragment_state)
+        return fr
     }
 
-    fun home(): HomeFragment {
-        return HomeFragment()
+    private fun loadFragment() {
+
+        fragment_state = SplashFragment()
+        Timer().schedule(2000) {
+            fragment_state = HomeFragment()
+            fr.postValue(fragment_state)
+        }
     }
+
 
 }
