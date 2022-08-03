@@ -1,116 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-        <com.google.android.material.appbar.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <com.google.android.material.appbar.CollapsingToolbarLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                android:background="@color/white"
+                app:layout_collapseMode="parallax">
 
-                <RelativeLayout
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/discover"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    app:layout_collapseMode="parallax">
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="50dp"
+                    android:fontFamily="@font/roboto_black"
+                    android:text="Discover"
+                    android:textColor="@color/DarkBlue"
+                    android:textSize="30dp" />
 
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/hintDiscover"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/discover"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="3dp"
+                    android:fontFamily="@font/roboto_light"
+                    android:text="TecNews, find the newest news about TECHNOLOGY"
+                    android:textColor="@color/DarkBlue"
+                    android:textColorHint="@color/white"
+                    android:textSize="14dp" />
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/discover"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/TIL_search"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/hintDiscover"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="18dp"
+                    android:layout_marginBottom="30dp"
+                    android:hint="Search ..."
+                    android:textColorHint="@color/DarkBlue"
+                    app:hintTextColor="@color/Orenge">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_search"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="50dp"
-                        android:fontFamily="@font/roboto_black"
-                        android:text="Discover"
+                        android:fontFamily="@font/roboto_medium"
+                        android:imeOptions="actionSearch"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:maxLines="1"
                         android:textColor="@color/DarkBlue"
-                        android:textSize="30dp"
-                        />
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/hintDiscover"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/discover"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginTop="3dp"
-                        android:fontFamily="@font/roboto_light"
-                        android:text="TecNews, find the newest news about TECHNOLOGY"
-                        android:textColor="@color/DarkBlue"
-                        android:textColorHint="@color/white"
-                        android:textSize="14dp" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/title_top_news"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/TIL_search"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="6dp"
+                    android:fontFamily="@font/roboto_black"
+                    android:text="Top News"
+                    android:textColor="@color/DarkBlue"
+                    android:textSize="18sp" />
+                
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/REC_top_news"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/title_top_news"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                    app:spanCount="1" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/TIL_search"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/hintDiscover"
-                        android:layout_marginStart="18dp"
-                        android:layout_marginTop="30dp"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_marginEnd="18dp"
-                        android:hint="Search ..."
-                        android:textColorHint="@color/DarkBlue"
-                        app:hintTextColor="@color/Orenge"
-                        android:layout_marginBottom="30dp">
+            </RelativeLayout>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_search"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_medium"
-                            android:lines="1"
-                            android:maxLines="1"
-                            android:imeOptions="actionSearch"
-                            android:inputType="text"
-                            android:textColor="@color/DarkBlue"
-                            android:textSize="16sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/title_top_news"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_black"
-                        android:layout_below="@+id/TIL_search"
-                        android:text="Top News"
-                        android:layout_marginStart="10dp"
-                        android:textSize="18sp"
-                        android:layout_marginBottom="6dp"
-                        android:textColor="@color/DarkBlue"/>
+    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-                    <HorizontalScrollView
-                        android:id="@+id/hsv_top_news"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/title_top_news"
-                        android:layout_marginBottom="18dp">
+        <include layout="@layout/bottom_home" />
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/REC_top_news"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+    </androidx.core.widget.NestedScrollView>
 
-                    </HorizontalScrollView>
-                </RelativeLayout>
-
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <androidx.core.widget.NestedScrollView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-
-            <include layout="@layout/bottom_home"/>
-
-        </androidx.core.widget.NestedScrollView>
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
