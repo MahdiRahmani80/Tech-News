@@ -10,13 +10,14 @@ import kotlin.concurrent.schedule
 
 class MainViewModel : ViewModel() {
 
+    private var fragment_state:Fragment? = null
     private val fr: MutableLiveData<Fragment> by lazy {
         MutableLiveData<Fragment>().also {
             loadFragment()
         }
     }
 
-    private var fragment_state:Fragment? = null
+
 
     fun makeFragment(): MutableLiveData<Fragment> {
         fr.postValue(fragment_state)

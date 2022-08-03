@@ -1,16 +1,11 @@
 package com.MehdiRahmani.TecNews.Main
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.FrameLayout
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.MehdiRahmani.TecNews.R
-import java.util.*
-import kotlin.concurrent.schedule
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +19,9 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun updateFragment(fr: Fragment){
-        supportFragmentManager.beginTransaction().replace(R.id.frame_layout,fr).commit()
+        supportFragmentManager.beginTransaction()
+            .setCustomAnimations(R.anim.change_fr_1,R.anim.change_fr_2)
+            .replace(R.id.frame_layout,fr)
+            .commit()
     }
 }
