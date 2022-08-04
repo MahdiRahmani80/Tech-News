@@ -2,9 +2,9 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android">
 
     <scale
-        android:duration="850"
-        android:fromXScale="0.0"
-        android:fromYScale="0.0"
+        android:duration="400"
+        android:fromXScale="0.6"
+        android:fromYScale="0.99"
         android:interpolator="@android:anim/linear_interpolator"
         android:toXScale="1.0"
         android:toYScale="1.0" />

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?colorSecondary">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -19,7 +20,7 @@
             android:layout_height="wrap_content"
             android:text="TeCH nEws"
             android:layout_marginTop="15dp"
-            android:textColor="@color/DarkBlue"
+            android:textColor="?colorOnSecondary"
             android:textSize="20dp"
             android:fontFamily="@font/roboto_black"
             android:layout_gravity="center"/>

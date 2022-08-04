@@ -12,4 +12,13 @@
     <color name="Red">#D61C4E</color>
     <color name="Orenge">#FEB139</color>
     <color name="Yellow">#FFF80A</color>
+    
+    <color name="DarkMood_primary">#041C32</color>
+    <color name="DarkMood_on_primary">#04293A</color>
+    <color name="DarkMood_Sec">#064663</color>
+    <color name="DarkMood_onSec">#ECB365</color>
+
+
+    <color name="Background_item">#fcfbf8</color>
+    <color name="Background">#ebeae0</color>
 </resources>

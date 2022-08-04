@@ -7,38 +7,43 @@
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?colorSecondary"
+        app:tabIndicatorColor="?colorOnPrimary"
         app:tabMode="scrollable"
-        style="@style/Widget.MaterialComponents.TabLayout"
-        app:tabRippleColor="@color/DarkBlue"
-        app:tabTextColor="@color/DarkBlue"
+        app:tabRippleColor="?colorPrimary"
         app:tabSelectedTextColor="@color/Orenge"
-        app:tabIndicatorColor="@color/DarkBlue">
+        app:tabTextColor="?colorOnPrimary">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Apple"
-            />
+            android:text="Apple" />
+
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Microsft" />
+
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="GeekForGeeks" />
+
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Google" />
+
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tesla" />
+
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nasa" />
+
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
