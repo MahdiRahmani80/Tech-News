@@ -6,11 +6,17 @@
         <entry key="app/src/main/res/drawable/bg_home_search.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bg_top_news_item.xml" value="0.18" />
         <entry key="app/src/main/res/drawable/top_bg_home.xml" value="0.1" />
+        <entry key="app/src/main/res/layout-land/home.xml" value="0.1609347442680776" />
+        <entry key="app/src/main/res/layout-land/splash.xml" value="0.33" />
         <entry key="app/src/main/res/layout/bottom_home.xml" value="0.22" />
         <entry key="app/src/main/res/layout/bottom_home_view_in_nested.xml" value="0.171875" />
         <entry key="app/src/main/res/layout/home.xml" value="0.22" />
         <entry key="app/src/main/res/layout/home_nested.xml" value="0.171875" />
+        <entry key="app/src/main/res/layout/home_tab_viewpager_fragment.xml" value="0.1890625" />
+        <entry key="app/src/main/res/layout/item_company_news.xml" value="0.1890625" />
         <entry key="app/src/main/res/layout/item_home_top_news.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/news_text.xml" value="0.1890625" />
+        <entry key="app/src/main/res/layout/single_news_fragment.xml" value="0.1890625" />
         <entry key="app/src/main/res/layout/splash.xml" value="0.1" />
       </map>
     </option>

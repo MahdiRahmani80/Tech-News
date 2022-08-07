@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="18dp"
+    android:background="?colorSecondary">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/single_news_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_black"
+        android:text="News Text"
+        android:textColor="?attr/colorOnSecondary"
+        android:textSize="26sp" />
+
+    <ScrollView
+        android:id="@+id/sv_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/single_news_title"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="10dp"
+        android:paddingBottom="14dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/main_news"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="News Text"
+            android:textColor="?attr/colorOnSecondary"
+            android:textSize="16sp"/>
+    </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/EFAB_single_news"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Go to website"
+        app:backgroundTint="?attr/colorOnSecondary"
+        android:textColor="?attr/colorSecondary"/>
+
+</RelativeLayout>

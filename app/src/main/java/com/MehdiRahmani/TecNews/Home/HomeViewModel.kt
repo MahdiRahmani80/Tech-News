@@ -13,6 +13,30 @@ class HomeViewModel: ViewModel() {
             getTopNewsFromServer()
         }
     }
+    private var tab_data:List<String>? = null
+    private val tab_title:MutableLiveData<List<String>> by lazy{
+        MutableLiveData<List<String>>().also {
+            tab_data = mkTabTitles()
+        }
+    }
+
+    fun getTabs():LiveData<List<String>>{
+        tab_title.postValue(tab_data)
+        return tab_title
+    }
+
+    private fun mkTabTitles():ArrayList<String> {
+        val tabList = ArrayList<String>()
+        tabList.add("Apple")
+        tabList.add("Microsoft")
+        tabList.add("Google")
+        tabList.add("RedHat")
+        tabList.add("Yahoo")
+        tabList.add("Meta")
+        tabList.add("Samsung")
+        tabList.add("Dell")
+        return tabList
+    }
 
     fun getTopNews(): LiveData<List<News>> {
         topNews.postValue(news_state)
