@@ -18,7 +18,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class HomeFragment : Fragment() {
 
-    private var pos:Int? = null
+    private var tabLayout:TabLayout? =null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,7 +49,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun mkTabLayout(context: Context, view: View, viewModel: HomeViewModel) {
-        val tabLayout: TabLayout = view.findViewById(R.id.tl_home)
+        tabLayout = view.findViewById(R.id.tl_home)
         val viewPager: ViewPager2 = view.findViewById(R.id.vp_home)
 
         viewModel.getTabs().observe(viewLifecycleOwner, Observer<List<String>> { data ->
@@ -57,9 +57,8 @@ class HomeFragment : Fragment() {
 //            SET ADAPTER
             viewPager.adapter = ViewPagerAdapter(requireActivity(), data.size)
 
-            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            TabLayoutMediator(tabLayout!!, viewPager) { tab, position ->
                 tab.text = data[position]
-                pos= position
             }.attach()
 
         })
