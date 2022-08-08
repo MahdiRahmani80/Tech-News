@@ -28,7 +28,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="40dp"
-                    android:fontFamily="@font/oxford_font"
+                    android:fontFamily="@font/cormorant_garamond_bold_italic"
                     android:text="Discover"
                     android:textColor="?colorOnSecondary"
                     android:textSize="40dp" />
@@ -40,7 +40,7 @@
                     android:layout_below="@+id/discover"
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="3dp"
-                    android:fontFamily="@font/oxford_font"
+                    android:fontFamily="@font/cormorant_garamond_medium"
                     android:text="TecNews, find the newest news about TECHNOLOGY"
                     android:textColor="?colorOnSecondary"
                     android:textColorHint="@color/white"
@@ -54,9 +54,9 @@
                     android:layout_marginStart="18dp"
                     android:layout_marginTop="30dp"
                     android:layout_marginEnd="18dp"
-                    android:layout_marginBottom="30dp"
                     android:background="?colorOnSecondary"
                     android:hint="Search ..."
+                    style="@style/tab_text"
                     android:padding="1dp"
                     android:textColorHint="?attr/colorOnSecondary"
                     app:hintTextColor="@color/Orenge">
@@ -65,7 +65,6 @@
                         android:id="@+id/et_search"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_medium"
                         android:imeOptions="actionSearch"
                         android:inputType="text"
                         android:lines="1"
@@ -79,12 +78,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/TIL_search"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginBottom="6dp"
-                    android:fontFamily="@font/roboto_black"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/cormorant_garamond_bold"
                     android:text="Top News"
                     android:textColor="?colorOnSecondary"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/REC_top_news"
@@ -101,13 +101,14 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <include layout="@layout/bottom_home" />
+        <include layout="@layout/bottom_home"/>
 
-    </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

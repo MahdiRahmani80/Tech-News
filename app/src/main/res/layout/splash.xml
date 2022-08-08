@@ -18,11 +18,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TeCH nEws"
+            android:text="Tech News ..."
             android:layout_marginTop="15dp"
             android:textColor="?colorOnSecondary"
             android:textSize="20dp"
-            android:fontFamily="@font/roboto_black"
+            android:fontFamily="@font/cormorant_garamond_bold_italic"
             android:layout_gravity="center"/>
     </LinearLayout>
 </RelativeLayout>

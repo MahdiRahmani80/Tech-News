@@ -1,6 +1,5 @@
 package com.MehdiRahmani.TecNews.SingleNewsPage
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,9 +12,10 @@ import androidx.lifecycle.Observer
 import com.MehdiRahmani.TecNews.Model.News
 import com.MehdiRahmani.TecNews.R
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-import com.google.android.material.textview.MaterialTextView
 
-class SingleNewsFragment:Fragment() {
+class SingleNewsFragment():Fragment() {
+
+    var news:News?=null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,12 +38,25 @@ class SingleNewsFragment:Fragment() {
         val fab:ExtendedFloatingActionButton = view.findViewById(R.id.EFAB_single_news)
 
        val viewModel:NewsPageViewModel by viewModels()
-        viewModel.getNews().observe(viewLifecycleOwner, Observer<News>{ data->
-            newsTitle.text = data.title
-            newsText.text = data.content
-            fabOnClick(data,fab)
-            showImage(data,newsIMG)
+
+        if (news != null){
+            viewModel.get_news().postValue(news)
+        }
+
+        viewModel.get_news().observe(viewLifecycleOwner, Observer<News>{ data->
+
+            newsTitle.text = data!!.title
+            newsText.text = data!!.description
+            fabOnClick(data!!,fab)
+            fabHide(fab)
+            showImage(data!!,newsIMG)
         })
+    }
+
+
+    private fun fabHide(fab: ExtendedFloatingActionButton) {
+//        TODO : if scroll down hide and up is show
+
     }
 
 
@@ -56,4 +69,6 @@ class SingleNewsFragment:Fragment() {
     private fun showImage(data:News,imageView:ImageView){
 //        TODO : Add GLIDE and set Image
     }
+
+
 }

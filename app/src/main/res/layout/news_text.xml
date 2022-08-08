@@ -10,7 +10,7 @@
         android:id="@+id/single_news_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_black"
+        android:fontFamily="@font/cormorant_garamond_bold"
         android:text="News Text"
         android:textColor="?attr/colorOnSecondary"
         android:textSize="26sp" />
@@ -20,16 +20,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/single_news_title"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="10dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="10dp"
         android:paddingBottom="14dp">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/main_news"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_medium"
+            android:fontFamily="@font/cormorant_garamond_regular"
             android:text="News Text"
             android:textColor="?attr/colorOnSecondary"
             android:textSize="16sp"/>
@@ -42,6 +42,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:text="Go to website"
+        android:fontFamily="@font/cormorant_garamond_bold"
         app:backgroundTint="?attr/colorOnSecondary"
         android:textColor="?attr/colorSecondary"/>
 

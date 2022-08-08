@@ -24,12 +24,24 @@ class BottomHomeViewModel: ViewModel() {
 
     private fun getNewsFromDB(position:Int) {
 //        TODO : GET NEWS
-       
-        val listNews = ArrayList<News>()
-        val n = News()
-        n.title = "Title $pos"
 
-        listNews.add(n)
+        val listNews = ArrayList<News>()
+
+        val news = News()
+        news.author="Jane Marsh"
+        news.title="Reducing the Risk for Housefires with EV Charging"
+        news.description="Once a fringe technology, electric vehicles (EVs) are now a common sight. As more people leave their gas-powered cars for these more eco-friendly options, some unexpected obstacles have surfaced. Some drivers worry that their EVs may catch fire while charging…"
+        news.publishedAt="2022-08-02"
+
+        listNews.add(news)
+        listNews.add(news)
+        listNews.add(news)
+        listNews.add(news)
+        listNews.add(news)
+        listNews.add(news)
+        listNews.add(news)
+        listNews.add(news)
+        listNews.add(news)
         postNews = listNews
 
 
