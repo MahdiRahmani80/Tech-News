@@ -3,6 +3,7 @@ package com.MehdiRahmani.TecNews.Main
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.FrameLayout
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
@@ -11,9 +12,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.MehdiRahmani.TecNews.R
 
 var mainViewModel: MainViewModel? = null
-
-
 class MainActivity : AppCompatActivity() {
+
+    private var addFR: MutableLiveData<Fragment>? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -23,15 +25,15 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+
         mainViewModel!!.makeFragment()
             .observe(this, Observer<Fragment> { fragment -> updateFragment(fragment) })
 
-
-        val addFR: MutableLiveData<Fragment>? = mainViewModel!!.addFragment()
+        addFR = mainViewModel!!.addFragment()
         addFR!!.observe(this, Observer<Fragment> { fragment ->
             if (fragment != null) {
                 addFragment(fragment)
-                addFR.postValue(null)
+//                addFR.postValue(null)
             }
         })
 
@@ -51,8 +53,11 @@ class MainActivity : AppCompatActivity() {
             .add(R.id.frame_layout, fr)
             .addToBackStack("single_news")
             .commit()
-
-
     }
 
+    override fun onBackPressed() {
+
+        if(addFR !== null) addFR!!.postValue(null)
+        super.onBackPressed()
+    }
 }

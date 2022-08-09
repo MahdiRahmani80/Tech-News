@@ -70,5 +70,4 @@ class SingleNewsFragment():Fragment() {
 //        TODO : Add GLIDE and set Image
     }
 
-
 }

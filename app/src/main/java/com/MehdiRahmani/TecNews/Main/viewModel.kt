@@ -25,26 +25,21 @@ class MainViewModel : ViewModel() {
         MutableLiveData<Fragment>()
     }
 
+    fun makeFragment(): MutableLiveData<Fragment> = fr
 
-    fun makeFragment(): MutableLiveData<Fragment> {
-        fr.postValue(fragment_state)
-        return fr
-    }
-
-    fun addFragment(): MutableLiveData<Fragment>? {
-        return go_news_single
-    }
+    fun addFragment(): MutableLiveData<Fragment>? =go_news_single
 
     fun setNews(news: News) {
 
         singleNews.news = news
         go_news_single.postValue(singleNews)
-
     }
 
     private fun loadFragment() {
 
         fragment_state = SplashFragment()
+        if (fragment_state == null) fr.postValue(fragment_state)
+
         Timer().schedule(2000) {
             fragment_state = HomeFragment()
             fr.postValue(fragment_state)
