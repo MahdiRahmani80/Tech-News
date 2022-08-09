@@ -1,5 +1,6 @@
 package com.MehdiRahmani.TecNews.SingleNewsPage
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.MehdiRahmani.TecNews.Model.News
 import com.MehdiRahmani.TecNews.R
+import com.bumptech.glide.Glide
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import kotlin.coroutines.Continuation
 
 class SingleNewsFragment():Fragment() {
 
@@ -49,7 +52,7 @@ class SingleNewsFragment():Fragment() {
             newsText.text = data!!.description
             fabOnClick(data!!,fab)
             fabHide(fab)
-            showImage(data!!,newsIMG)
+            showImage(data!!,newsIMG,this)
         })
     }
 
@@ -66,8 +69,14 @@ class SingleNewsFragment():Fragment() {
         }
     }
 
-    private fun showImage(data:News,imageView:ImageView){
-//        TODO : Add GLIDE and set Image
+    private fun showImage(data:News,imageView:ImageView,fragment: Fragment){
+
+        val orientation = resources.configuration.orientation
+        if (data.urlToImage != null && orientation== Configuration.ORIENTATION_PORTRAIT ) {
+            Glide.with(fragment)
+                .load(data.urlToImage)
+                .into(imageView)
+        }
     }
 
 }

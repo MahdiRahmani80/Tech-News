@@ -32,6 +32,7 @@ class BottomHomeViewModel: ViewModel() {
         news.title="Reducing the Risk for Housefires with EV Charging"
         news.description="Once a fringe technology, electric vehicles (EVs) are now a common sight. As more people leave their gas-powered cars for these more eco-friendly options, some unexpected obstacles have surfaced. Some drivers worry that their EVs may catch fire while charging…"
         news.publishedAt="2022-08-02"
+        news.urlToImage="https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/Model_Y_far_side_airbag.jpg"
 
         listNews.add(news)
         listNews.add(news)
