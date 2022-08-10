@@ -38,9 +38,11 @@ class MainViewModel : ViewModel() {
 
     private fun loadFragment() {
 
-        fragment_state = SplashFragment()
-        if (fragment_state == null) fr.postValue(fragment_state)
 
+        Timer().schedule(1) {
+            fragment_state = SplashFragment()
+            fr.postValue(fragment_state)
+        }
         Timer().schedule(2000) {
             fragment_state = HomeFragment()
             fr.postValue(fragment_state)
