@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
+import com.MehdiRahmani.TecNews.Model.Articles
 import com.MehdiRahmani.TecNews.Model.News
 import com.MehdiRahmani.TecNews.R
 import com.google.android.material.tabs.TabLayout
@@ -43,7 +44,7 @@ class HomeFragment : Fragment() {
         val SGLManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL)
         recycler.layoutManager = SGLManager
 
-        viewModel.getTopNews().observe(viewLifecycleOwner, Observer<List<News>> { news ->
+        viewModel.getTopNews().observe(viewLifecycleOwner, Observer<List<Articles>> { news ->
             recycler.adapter = HorizontalRecyclerAdapter(news)
         })
     }
@@ -55,7 +56,7 @@ class HomeFragment : Fragment() {
         viewModel.getTabs().observe(viewLifecycleOwner, Observer<List<String>> { data ->
 
 //            SET ADAPTER
-            viewPager.adapter = ViewPagerAdapter(requireActivity(), data.size)
+            viewPager.adapter = ViewPagerAdapter(requireActivity(), data)
 
             TabLayoutMediator(tabLayout!!, viewPager) { tab, position ->
                 tab.text = data[position]

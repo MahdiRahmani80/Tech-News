@@ -13,10 +13,11 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.MehdiRahmani.TecNews.Model.Articles
 import com.MehdiRahmani.TecNews.Model.News
 import com.MehdiRahmani.TecNews.R
 
-class BottomFragment(private var position: Int = 0) : Fragment() {
+class BottomFragment(private var position: Int = 0,private var tab:String ="Google") : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,7 +35,7 @@ class BottomFragment(private var position: Int = 0) : Fragment() {
 
         ifConfigurationChanged(recyclerView)
 
-        viewModel.getNews(position).observe(requireActivity(), Observer<List<News>> { newsList ->
+        viewModel.getNews(position,tab).observe(requireActivity(), Observer<List<Articles>> { newsList ->
             recyclerView.adapter = BottomAdapter(newsList)
         })
 

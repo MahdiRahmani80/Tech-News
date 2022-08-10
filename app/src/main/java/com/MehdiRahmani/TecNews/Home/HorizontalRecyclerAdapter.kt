@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.MehdiRahmani.TecNews.Home.HorizontalRecyclerAdapter.ViewHolder
 import com.MehdiRahmani.TecNews.Main.mainViewModel
+import com.MehdiRahmani.TecNews.Model.Articles
 import com.MehdiRahmani.TecNews.Model.News
 import com.MehdiRahmani.TecNews.R
 import com.google.android.material.textview.MaterialTextView
 
-class HorizontalRecyclerAdapter(private val newsList: List<News>) : RecyclerView.Adapter<ViewHolder>() {
+class HorizontalRecyclerAdapter(private val newsList: List<Articles>) : RecyclerView.Adapter<ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.MehdiRahmani.TecNews.HomeViewPagerFragment.BottomAdapter.*
 import com.MehdiRahmani.TecNews.Main.mainViewModel
+import com.MehdiRahmani.TecNews.Model.Articles
 import com.MehdiRahmani.TecNews.Model.News
 import com.MehdiRahmani.TecNews.R
 import com.google.android.material.textview.MaterialTextView
 
-class BottomAdapter(private val newsList:List<News>):
+class BottomAdapter(private val newsList:List<Articles>):
     RecyclerView.Adapter<ViewHolder>() {
 
 

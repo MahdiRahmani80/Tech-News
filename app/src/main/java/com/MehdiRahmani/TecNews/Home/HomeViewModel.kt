@@ -1,31 +1,37 @@
 package com.MehdiRahmani.TecNews.Home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.MehdiRahmani.TecNews.Model.API.APIClient
+import com.MehdiRahmani.TecNews.Model.Articles
 import com.MehdiRahmani.TecNews.Model.News
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class HomeViewModel: ViewModel() {
+class HomeViewModel : ViewModel() {
 
-    private var news_state:List<News>? = null
-    private val topNews:MutableLiveData<List<News>> by lazy{
-        MutableLiveData<List<News>>().also {
+    private var news_state: News? = null
+    private val topNews: MutableLiveData<List<Articles>> by lazy {
+        MutableLiveData<List<Articles>>().also {
             getTopNewsFromServer()
         }
     }
-    private var tab_data:List<String>? = null
-    private val tab_title:MutableLiveData<List<String>> by lazy{
+    private var tab_data: List<String>? = null
+    private val tab_title: MutableLiveData<List<String>> by lazy {
         MutableLiveData<List<String>>().also {
             tab_data = mkTabTitles()
         }
     }
 
-    fun getTabs():LiveData<List<String>>{
+    fun getTabs(): LiveData<List<String>> {
         tab_title.postValue(tab_data)
         return tab_title
     }
 
-    private fun mkTabTitles():ArrayList<String> {
+    private fun mkTabTitles(): ArrayList<String> {
         val tabList = ArrayList<String>()
         tabList.add("Apple")
         tabList.add("Microsoft")
@@ -38,36 +44,39 @@ class HomeViewModel: ViewModel() {
         return tabList
     }
 
-    fun getTopNews(): LiveData<List<News>> {
-        topNews.postValue(news_state)
-        return topNews
+    fun getTopNews(): LiveData<List<Articles>> {
+        return if (news_state != null && news_state!!.articles != null) {
+            topNews.postValue(news_state!!.articles)
+            topNews
+        } else topNews
+
     }
 
     private fun getTopNewsFromServer() {
-//        Get News From Retrofit, and make fun in models
-        val newsList = ArrayList<News>()
-
-        val news = News()
-        news.author="Mike Smitka"
-        news.title="China NEV Segment Analysis: BYD, VW, And Geely Stand Out"
-        news.description="China's auto industry faces numerous short-run and long-run headwinds; NEVs will not be exempt. it is foolish to project recent growth beyond the next year."
-        news.publishedAt="2022-08-02"
 
 
-        val news2 = News()
-        news2.author="Jane Marsh"
-        news2.title="Reducing the Risk for Housefires with EV Charging"
-        news2.description="Once a fringe technology, electric vehicles (EVs) are now a common sight. As more people leave their gas-powered cars for these more eco-friendly options, some unexpected obstacles have surfaced. Some drivers worry that their EVs may catch fire while charging…"
-        news2.publishedAt="2022-08-02"
-        news.urlToImage="https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/Model_Y_far_side_airbag.jpg"
+        val service = APIClient().serviceAPI().getTOPNews()
 
-        newsList.add(news)
-        newsList.add(news2)
-        newsList.add(news)
-        newsList.add(news2)
-        newsList.add(news)
+        try {
+            service.enqueue(object : Callback<News> {
 
+                override fun onResponse(call: Call<News>?, response: Response<News>?) {
+                    if (response?.body() != null && response != null) {
+                        news_state = response?.body()
+                        topNews?.postValue(news_state!!.articles)
+                        Log.e("Retrofit", response.toString())
+                    }
+                }
 
-        news_state = newsList
+                override fun onFailure(call: Call<News>?, t: Throwable?) {
+                    Log.e("RetrofitError", t.toString())
+                }
+
+            })
+
+        } catch (e: Exception) {
+            Log.e("RetrofitCatch", e.toString())
+        }
+
     }
 }

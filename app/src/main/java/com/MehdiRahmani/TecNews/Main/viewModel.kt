@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.MehdiRahmani.TecNews.Home.HomeFragment
+import com.MehdiRahmani.TecNews.Model.Articles
 import com.MehdiRahmani.TecNews.Model.News
 import com.MehdiRahmani.TecNews.SingleNewsPage.SingleNewsFragment
 import java.util.*
@@ -29,9 +30,9 @@ class MainViewModel : ViewModel() {
 
     fun addFragment(): MutableLiveData<Fragment>? =go_news_single
 
-    fun setNews(news: News) {
+    fun setNews(article: Articles) {
 
-        singleNews.news = news
+        singleNews.article = article
         go_news_single.postValue(singleNews)
     }
 
