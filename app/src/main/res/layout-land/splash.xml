@@ -23,9 +23,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="15dp"
-            android:fontFamily="@font/cormorant_garamond_bold_italic"
+            android:fontFamily="@font/cormorant_garamond_bold"
             android:gravity="center"
-            android:text="TeCH nEws"
+            android:text="Tech News"
             android:textColor="?colorOnSecondary"
             android:textSize="20dp" />
     </LinearLayout>

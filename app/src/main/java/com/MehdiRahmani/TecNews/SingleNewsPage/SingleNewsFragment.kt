@@ -1,6 +1,9 @@
 package com.MehdiRahmani.TecNews.SingleNewsPage
 
+import android.app.ActionBar
+import android.content.Intent
 import android.content.res.Configuration
+import android.net.Uri
 import android.os.Bundle
 import android.text.Html
 import android.util.Log
@@ -8,6 +11,8 @@ import android.view.GestureDetector
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.HorizontalScrollView
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatTextView
@@ -15,10 +20,12 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.MehdiRahmani.TecNews.Model.Articles
 import com.MehdiRahmani.TecNews.Model.News
 import com.MehdiRahmani.TecNews.R
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import org.jsoup.Jsoup
 import java.io.BufferedReader
@@ -64,7 +71,6 @@ class SingleNewsFragment() : Fragment() {
 
             newsTitle.text = data!!.title
             fabOnClick(data!!, fab)
-            fabHide(fab)
             Thread(object : Runnable {
                 override fun run() {
                     setText(newsText, data!!.url)
@@ -93,15 +99,13 @@ class SingleNewsFragment() : Fragment() {
     }
 
 
-    private fun fabHide(fab: ExtendedFloatingActionButton) {
-//        TODO : if scroll down hide and up is show
-
-    }
-
-
     private fun fabOnClick(data: Articles, fab: ExtendedFloatingActionButton) {
         fab.setOnClickListener {
-//            TODO : go to web view (I can use intents)
+
+            //  GO TO WEB BROWSER
+            val openUrl = Intent(android.content.Intent.ACTION_VIEW)
+            openUrl.data = Uri.parse(data!!.url)
+            startActivity(openUrl)
         }
     }
 
@@ -109,9 +113,18 @@ class SingleNewsFragment() : Fragment() {
 
         val orientation = resources.configuration.orientation
         if (data.urlToImage != null && orientation == Configuration.ORIENTATION_PORTRAIT) {
+
+            val circularProgressDrawable = CircularProgressDrawable(requireContext())
+            circularProgressDrawable.strokeWidth = 5f
+            circularProgressDrawable.centerRadius = 30f
+            circularProgressDrawable.start()
+
             Glide.with(fragment)
                 .load(data.urlToImage)
+                .placeholder(circularProgressDrawable)
+                .override(MATCH_PARENT,WRAP_CONTENT)
                 .into(imageView)
+
         }
     }
 

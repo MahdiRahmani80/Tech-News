@@ -11,6 +11,7 @@ import com.MehdiRahmani.TecNews.Model.Articles
 import com.MehdiRahmani.TecNews.Model.News
 import com.MehdiRahmani.TecNews.R
 import com.google.android.material.textview.MaterialTextView
+import org.jsoup.Jsoup
 
 class HorizontalRecyclerAdapter(private val newsList: List<Articles>) : RecyclerView.Adapter<ViewHolder>() {
 
@@ -23,10 +24,21 @@ class HorizontalRecyclerAdapter(private val newsList: List<Articles>) : Recycler
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
+        var disc = newsList[position].description
+        if (disc != null) {
+            disc= Jsoup.parse(newsList[position].description.replace("\n", " "))
+                .normalise().text()
+        }
+        else disc="Description not found !"
+
         holder.news_title.text = newsList[position].title
-        holder.news_disc.text = newsList[position].description
-        holder.news_author.text = newsList[position].author
-        holder.news_time.text = newsList[position].publishedAt
+        holder.news_disc.text = disc
+
+        if (newsList[position].author!=null)
+            holder.news_author.text = newsList[position].author
+        else holder.news_author.text = "Author Not Found"
+
+        holder.news_time.text = newsList[position].publishedAt.substring(0,10)
 
         holder.view.setOnClickListener(View.OnClickListener {
             mainViewModel!!.setNews(newsList[position])
