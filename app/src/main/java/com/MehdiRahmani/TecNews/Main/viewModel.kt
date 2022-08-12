@@ -25,7 +25,7 @@ class MainViewModel : ViewModel() {
 
     fun makeFragment(): MutableLiveData<Fragment> = fr
 
-    fun addFragment(): MutableLiveData<Fragment>? =go_news_single
+    fun addFragment(): MutableLiveData<Fragment> = go_news_single
 
     fun setNews(article: Articles) {
 
@@ -34,7 +34,6 @@ class MainViewModel : ViewModel() {
     }
 
     private fun loadFragment() {
-
 
         Thread{
             fragment_state = SplashFragment()
@@ -47,5 +46,18 @@ class MainViewModel : ViewModel() {
         }
     }
 
+    fun get_api_key():String{
+        val keyList= ArrayList<String>()
+        keyList.add("3617530aed3c4534a9587f9f539a60ef")
+        keyList.add("e0d30c3f9b244cd788e901dac36f28f3")
+        keyList.add("c32f1214ddf94bbeb6a2a170c6d51819")
+        keyList.add("2dba03e2d18042c9aee259a0f6cb1b6e")
+        keyList.add("c97b48b2b42f415da35eef5c3cb1c161")
+        keyList.add("378765dbd377412a9e1adc680c9c3b7f")
+        keyList.add("f3d555f3e8e643549cbfdb4e45e1fe1f")
+
+
+        return keyList[(0 until keyList.size-1).random()]
+    }
 
 }

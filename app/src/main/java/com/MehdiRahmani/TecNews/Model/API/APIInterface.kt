@@ -8,10 +8,10 @@ import retrofit2.http.Query
 
 interface APIInterface {
 
-    @GET("everything?sortBy=publishedAt&apiKey=e0d30c3f9b244cd788e901dac36f28f3&language=en")
-    fun getCompanyNews(@Query("q") q:String ): Call<News>
+    @GET("everything?sortBy=publishedAt&language=en")
+    fun getCompanyNews(@Query("q") q:String ,@Query("apiKey") apiKey:String): Call<News>
 
-    @GET("top-headlines?category=business&pageSize=35&country=us&apiKey=e0d30c3f9b244cd788e901dac36f28f3&language=en")
-    fun getTOPNews(): Call<News>
+    @GET("top-headlines?category=business&pageSize=35&country=us&language=en")
+    fun getTOPNews(@Query("apiKey") apiKey:String): Call<News>
 
 }

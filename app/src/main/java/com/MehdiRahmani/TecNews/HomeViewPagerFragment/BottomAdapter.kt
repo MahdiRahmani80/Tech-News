@@ -3,6 +3,7 @@ package com.MehdiRahmani.TecNews.HomeViewPagerFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.MehdiRahmani.TecNews.HomeViewPagerFragment.BottomAdapter.*
 import com.MehdiRahmani.TecNews.Main.mainViewModel
@@ -23,6 +24,20 @@ class BottomAdapter(private val newsList:List<Articles>):
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
+        if (newsList[position].title != ""  ) {
+            showNews(holder, position)
+            holder.rel_loading.visibility = View.GONE
+            holder.rel_news.visibility = View.VISIBLE
+        }
+        else {
+            holder.rel_loading.visibility = View.VISIBLE
+            holder.rel_news.visibility = View.GONE
+        }
+
+    }
+
+    private fun showNews(holder: ViewHolder, position: Int) {
 
         var disc = newsList[position].description
         if (disc != null) {
@@ -56,5 +71,7 @@ class BottomAdapter(private val newsList:List<Articles>):
         val news_disc: MaterialTextView = view.findViewById(R.id.news_disc)
         val news_author: MaterialTextView = view.findViewById(R.id.mtv_author)
         val news_time: MaterialTextView = view.findViewById(R.id.mtv_publish_time)
+        val rel_loading: RelativeLayout = view.findViewById(R.id.loading)
+        val rel_news: RelativeLayout = view.findViewById(R.id.main_news)
     }
 }

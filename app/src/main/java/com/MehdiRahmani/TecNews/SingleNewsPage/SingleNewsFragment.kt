@@ -1,40 +1,28 @@
 package com.MehdiRahmani.TecNews.SingleNewsPage
 
-import android.app.ActionBar
 import android.content.Intent
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
-import android.text.Html
-import android.util.Log
-import android.view.GestureDetector
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-import android.widget.HorizontalScrollView
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.MehdiRahmani.TecNews.Model.Articles
-import com.MehdiRahmani.TecNews.Model.News
 import com.MehdiRahmani.TecNews.R
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import org.jsoup.Jsoup
-import java.io.BufferedReader
 import java.net.HttpURLConnection
-import java.net.MalformedURLException
 import java.net.URL
-import kotlin.coroutines.Continuation
 
-class SingleNewsFragment() : Fragment() {
+class SingleNewsFragment : Fragment() {
 
     var article: Articles? = null
 
@@ -67,35 +55,36 @@ class SingleNewsFragment() : Fragment() {
             viewModel.get_news().postValue(article)
         }
 
-        viewModel.get_news().observe(viewLifecycleOwner, Observer<Articles> { data ->
+        viewModel.get_news().observe(viewLifecycleOwner) { data ->
 
             newsTitle.text = data!!.title
-            fabOnClick(data!!, fab)
-            Thread(object : Runnable {
-                override fun run() {
-                    setText(newsText, data!!.url)
-                }
-            }).start()
+            fabOnClick(data, fab)
+            Thread { setText(newsText, data.url) }.start()
 
-            showImage(data!!, newsIMG, this)
-        })
+            showImage(data, newsIMG, this)
+        }
     }
 
     private fun setText(newsText: AppCompatTextView, u: String) {
 
         val url = URL(u)
         val urlConnection = url.openConnection() as HttpURLConnection
+        urlConnection.usingProxy()
+        var text = "News details not found , you can click on 'GO TO WEBSITE'"
+
 
         try {
-            val text = urlConnection.inputStream.bufferedReader().readText()
-            Log.d("UrlTest", text)
-            newsText.post {
-                newsText.text = Jsoup.parse(text).normalise().text()
-            }
+            text = urlConnection.inputStream.bufferedReader().readText()
+            if (text.isNotEmpty())
+                text = Jsoup.parse(text).normalise().text()
         } finally {
             urlConnection.disconnect()
         }
 
+
+        newsText.post {
+            newsText.text = text
+        }
     }
 
 
@@ -103,8 +92,8 @@ class SingleNewsFragment() : Fragment() {
         fab.setOnClickListener {
 
             //  GO TO WEB BROWSER
-            val openUrl = Intent(android.content.Intent.ACTION_VIEW)
-            openUrl.data = Uri.parse(data!!.url)
+            val openUrl = Intent(Intent.ACTION_VIEW)
+            openUrl.data = Uri.parse(data.url)
             startActivity(openUrl)
         }
     }
@@ -112,7 +101,7 @@ class SingleNewsFragment() : Fragment() {
     private fun showImage(data: Articles, imageView: ImageView, fragment: Fragment) {
 
         val orientation = resources.configuration.orientation
-        if (data.urlToImage != null && orientation == Configuration.ORIENTATION_PORTRAIT) {
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
 
             val circularProgressDrawable = CircularProgressDrawable(requireContext())
             circularProgressDrawable.strokeWidth = 5f
@@ -122,7 +111,7 @@ class SingleNewsFragment() : Fragment() {
             Glide.with(fragment)
                 .load(data.urlToImage)
                 .placeholder(circularProgressDrawable)
-                .override(MATCH_PARENT,WRAP_CONTENT)
+                .override(MATCH_PARENT, WRAP_CONTENT)
                 .into(imageView)
 
         }

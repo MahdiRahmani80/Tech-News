@@ -3,7 +3,10 @@ package com.MehdiRahmani.TecNews.Home
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.MehdiRahmani.TecNews.Home.HorizontalRecyclerAdapter.ViewHolder
 import com.MehdiRahmani.TecNews.Main.mainViewModel
@@ -24,6 +27,20 @@ class HorizontalRecyclerAdapter(private val newsList: List<Articles>) : Recycler
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
+        if (newsList[position].title != ""  ) {
+            showNews(holder, position)
+            holder.rel_loading.visibility = GONE
+            holder.rel_news.visibility = VISIBLE
+        }
+        else {
+            holder.rel_loading.visibility = VISIBLE
+            holder.rel_news.visibility = GONE
+        }
+
+    }
+
+    private fun showNews(holder: ViewHolder, position: Int) {
+
         var disc = newsList[position].description
         if (disc != null) {
             disc= Jsoup.parse(newsList[position].description.replace("\n", " "))
@@ -43,7 +60,6 @@ class HorizontalRecyclerAdapter(private val newsList: List<Articles>) : Recycler
         holder.view.setOnClickListener(View.OnClickListener {
             mainViewModel!!.setNews(newsList[position])
         })
-
     }
 
     override fun getItemCount(): Int {
@@ -56,6 +72,8 @@ class HorizontalRecyclerAdapter(private val newsList: List<Articles>) : Recycler
         val news_disc: MaterialTextView = view.findViewById(R.id.news_disc)
         val news_author: MaterialTextView = view.findViewById(R.id.mtv_author)
         val news_time: MaterialTextView = view.findViewById(R.id.mtv_publish_time)
+        val rel_news : RelativeLayout = view.findViewById(R.id.main)
+        val rel_loading : RelativeLayout = view.findViewById(R.id.loading)
     }
 
 

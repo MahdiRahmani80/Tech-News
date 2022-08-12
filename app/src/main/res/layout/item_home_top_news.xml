@@ -13,7 +13,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="170dp">
+        android:layout_height="170dp"
+        android:visibility="gone"
+        android:id="@+id/main">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/news_title"
@@ -68,6 +70,74 @@
                 android:fontFamily="@font/cormorant_garamond_medium"
                 android:gravity="right"
                 android:text="2022-08-03"
+                android:textColor="?colorOnSecondary"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+
+<!--    Item loading-->
+    <RelativeLayout
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="170dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/news_title_loading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:fontFamily="@font/cormorant_garamond_bold"
+            android:text="====================================="
+            android:textColor="?colorOnSecondary"
+            android:textSize="16dp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/news_disc_loading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/news_title_loading"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="15dp"
+            android:fontFamily="@font/cormorant_garamond_regular"
+            android:text="==============================================\n==============================================\n==============================================\n"
+            android:textColor="?colorOnSecondary"
+            android:textSize="9dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/mtv_author_loading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginStart="13dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/cormorant_garamond_bold_italic"
+                android:text="================="
+                android:textColor="?colorOnSecondary"
+                android:textSize="10sp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/mtv_publish_time_loading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="13dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/cormorant_garamond_medium"
+                android:gravity="right"
+                android:text="=========="
                 android:textColor="?colorOnSecondary"
                 android:textSize="10sp" />
         </LinearLayout>

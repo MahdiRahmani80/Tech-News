@@ -14,25 +14,38 @@ import retrofit2.Response
 
 class BottomHomeViewModel: ViewModel() {
 
+    private var isLoginCreated = false
     private var tabName:String? =null
     private var pos:Int? = null
     private var postNews:List<Articles>? =null
     private val news: MutableLiveData<List<Articles>> by lazy {
-        MutableLiveData<List<Articles>>().also{
-            getNewsFromDB()
-        }
+        MutableLiveData<List<Articles>>()
     }
 
     fun getNews(position:Int,tab:String): LiveData<List<Articles>> {
         tabName=tab
         pos=position
-//        news.postValue(postNews!!)
+
+        val loadingNewsList: ArrayList<Articles> = ArrayList<Articles>()
+        val loadingNews = Articles()
+        loadingNewsList.add(loadingNews)
+        loadingNewsList.add(loadingNews)
+        loadingNewsList.add(loadingNews)
+        loadingNewsList.add(loadingNews)
+        loadingNewsList.add(loadingNews)
+        loadingNewsList.add(loadingNews)
+        if (!isLoginCreated) {
+            isLoginCreated = true
+            getNewsFromDB()
+             news.postValue(loadingNewsList)
+        }
+
         return news
     }
 
     private fun getNewsFromDB() {
         if(tabName != null) {
-            val service = APIClient().serviceAPI().getCompanyNews(tabName!!)
+            val service = APIClient().serviceAPI().getCompanyNews(tabName!!,mainViewModel!!.get_api_key())
 
             service.enqueue(object : Callback<News>{
                 override fun onResponse(call: Call<News>?, response: Response<News>?) {

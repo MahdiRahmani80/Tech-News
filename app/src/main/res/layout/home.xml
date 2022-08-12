@@ -28,7 +28,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="30dp"
-                    android:fontFamily="@font/cormorant_garamond_bold_italic"
+                    android:fontFamily="@font/cormorant_garamond_bold"
                     android:text="Discover"
                     android:textColor="?colorOnSecondary"
                     android:textSize="40dp" />
