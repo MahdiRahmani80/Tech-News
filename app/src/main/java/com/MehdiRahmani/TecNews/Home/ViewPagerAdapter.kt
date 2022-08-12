@@ -10,6 +10,4 @@ class ViewPagerAdapter(frActivity: FragmentActivity, private var tabList: List<S
 
     override fun getItemCount(): Int = tabList.size
     override fun createFragment(position: Int): Fragment = BottomFragment(position!!,tabList[position])
-
-
 }

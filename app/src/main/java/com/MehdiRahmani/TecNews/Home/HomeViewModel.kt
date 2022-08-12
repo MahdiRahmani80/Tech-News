@@ -89,4 +89,5 @@ class HomeViewModel : ViewModel() {
             Log.e("RetrofitCatch", e.toString())
         }
     }
+
 }

@@ -1,20 +1,18 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
     <style name="Theme.TecNews" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/white</item>
-        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorSecondaryVariant">@color/DarkMood_Sec</item>
         <item name="colorOnSecondary">@color/colorOnSecondary</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" >?colorSecondary</item>
+        <item name="android:statusBarColor">?colorSecondary</item>
         <!-- Customize your theme here. -->
-        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
-
-
-
 </resources>

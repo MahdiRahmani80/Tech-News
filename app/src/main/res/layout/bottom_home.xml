@@ -9,11 +9,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?colorSecondary"
-        app:tabIndicatorColor="?colorOnPrimary"
+        app:tabIndicatorColor="?colorSecondaryVariant"
         app:tabMode="scrollable"
         app:tabTextAppearance="@style/tab_text"
         app:tabRippleColor="?colorPrimary"
-        app:tabSelectedTextColor="@color/Orenge"
+        app:tabSelectedTextColor="?colorSecondaryVariant"
         app:tabTextColor="?colorOnPrimary">
 
 

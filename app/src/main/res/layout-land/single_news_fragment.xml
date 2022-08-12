@@ -22,4 +22,6 @@
         <include layout="@layout/news_text" />
     </androidx.core.widget.NestedScrollView>
 
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

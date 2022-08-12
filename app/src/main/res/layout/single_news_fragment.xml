@@ -43,7 +43,7 @@
         android:fontFamily="@font/cormorant_garamond_bold"
         android:text="Go to website"
         android:textColor="?attr/colorSecondary"
-        app:backgroundTint="?attr/colorOnSecondary"
+        app:backgroundTint="?attr/colorSecondaryVariant"
         app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -8,7 +8,7 @@
     android:background="@drawable/bg_top_news_item"
     android:outlineSpotShadowColor="?colorOnPrimary"
     android:layoutDirection="ltr"
-    app:cardBackgroundColor="?colorSecondary"
+    app:cardBackgroundColor="?colorPrimary"
     app:cardCornerRadius="20dp">
 
     <RelativeLayout
@@ -26,7 +26,7 @@
             android:layout_marginEnd="15dp"
             android:fontFamily="@font/cormorant_garamond_bold"
             android:text="BHP to boost nickel exploration spending amid EV boom"
-            android:textColor="?colorOnSecondary"
+            android:textColor="?colorOnPrimary"
             android:textSize="16dp" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -39,7 +39,7 @@
             android:layout_marginEnd="15dp"
             android:fontFamily="@font/cormorant_garamond_regular"
             android:text="KALGOORLIE, Australia : BHP Group will increase its spending on nickel exploration over the next two years to meet growing demand for the raw material used in making electric vehicle batteries, the chief of its nickel operations said on Wednesday.BHP, through…"
-            android:textColor="?colorOnSecondary"
+            android:textColor="?colorOnPrimary"
             android:textSize="9dp" />
 
         <LinearLayout
@@ -57,7 +57,7 @@
                 android:layout_marginBottom="5dp"
                 android:fontFamily="@font/cormorant_garamond_bold_italic"
                 android:text="Author: Crystal Allen"
-                android:textColor="?colorOnSecondary"
+                android:textColor="?colorOnPrimary"
                 android:textSize="10sp" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -70,7 +70,7 @@
                 android:fontFamily="@font/cormorant_garamond_medium"
                 android:gravity="right"
                 android:text="2022-08-03"
-                android:textColor="?colorOnSecondary"
+                android:textColor="?colorOnPrimary"
                 android:textSize="10sp" />
         </LinearLayout>
 
@@ -94,7 +94,7 @@
             android:layout_marginEnd="15dp"
             android:fontFamily="@font/cormorant_garamond_bold"
             android:text="====================================="
-            android:textColor="?colorOnSecondary"
+            android:textColor="?colorOnPrimary"
             android:textSize="16dp" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -107,7 +107,7 @@
             android:layout_marginEnd="15dp"
             android:fontFamily="@font/cormorant_garamond_regular"
             android:text="==============================================\n==============================================\n==============================================\n"
-            android:textColor="?colorOnSecondary"
+            android:textColor="?colorOnPrimary"
             android:textSize="9dp" />
 
         <LinearLayout
@@ -125,7 +125,7 @@
                 android:layout_marginBottom="5dp"
                 android:fontFamily="@font/cormorant_garamond_bold_italic"
                 android:text="================="
-                android:textColor="?colorOnSecondary"
+                android:textColor="?colorOnPrimary"
                 android:textSize="10sp" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -138,7 +138,7 @@
                 android:fontFamily="@font/cormorant_garamond_medium"
                 android:gravity="right"
                 android:text="=========="
-                android:textColor="?colorOnSecondary"
+                android:textColor="?colorOnPrimary"
                 android:textSize="10sp" />
         </LinearLayout>
 

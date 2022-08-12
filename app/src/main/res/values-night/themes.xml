@@ -6,11 +6,11 @@
         <item name="colorPrimaryVariant">@color/DarkMood_onSec</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/DarkMood_primary</item>
+        <item name="colorSecondary">@color/DarkMood_Sec</item>
         <item name="colorSecondaryVariant">@color/DarkMood_onSec</item>
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/DarkMood_Sec</item>
         <!-- Customize your theme here. -->
     </style>
 
