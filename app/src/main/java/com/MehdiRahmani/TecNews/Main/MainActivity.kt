@@ -1,10 +1,14 @@
 package com.MehdiRahmani.TecNews.Main
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.FrameLayout
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -16,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     private var addFR: MutableLiveData<Fragment>? = null
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -24,10 +29,10 @@ class MainActivity : AppCompatActivity() {
             mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         }
 
-
-
-        mainViewModel!!.makeFragment()
+        val conn = this.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+        mainViewModel!!.makeFragment(conn)
             .observe(this, Observer<Fragment> { fragment -> updateFragment(fragment) })
+
 
         addFR = mainViewModel!!.addFragment()
         addFR!!.observe(this, Observer<Fragment> { fragment ->

@@ -17,6 +17,7 @@
         <entry key="app/src/main/res/layout/home.xml" value="0.22" />
         <entry key="app/src/main/res/layout/home_nested.xml" value="0.171875" />
         <entry key="app/src/main/res/layout/home_tab_viewpager_fragment.xml" value="0.1890625" />
+        <entry key="app/src/main/res/layout/internet_disconnected.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_company_news.xml" value="0.67" />
         <entry key="app/src/main/res/layout/item_home_top_news.xml" value="0.25" />
         <entry key="app/src/main/res/layout/main_vp.xml" value="0.1890625" />
@@ -31,5 +32,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.22" />
+      </ProjectState>
+    </option>
   </component>
 </project>
