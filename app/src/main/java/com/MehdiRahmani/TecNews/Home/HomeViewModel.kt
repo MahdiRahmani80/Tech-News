@@ -1,6 +1,8 @@
 package com.MehdiRahmani.TecNews.Home
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -44,12 +46,14 @@ class HomeViewModel : ViewModel() {
         return tabList
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     fun getTopNews(): LiveData<List<Articles>> {
         getTopNewsFromServer()
         return topNews
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun getTopNewsFromServer() {
 
         val loadingNewsList: ArrayList<Articles> = ArrayList<Articles>()
@@ -67,6 +71,7 @@ class HomeViewModel : ViewModel() {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun sendRequest(){
         val service = APIClient().serviceAPI().getTOPNews(mainViewModel!!.get_api_key())
         try {

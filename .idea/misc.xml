@@ -6,6 +6,7 @@
         <entry key="app/src/main/res/drawable/bg_home_search.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bg_top_news_item.xml" value="0.18" />
         <entry key="app/src/main/res/drawable/pending.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/toast.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/top_bg_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout-land/home.xml" value="0.25" />
         <entry key="app/src/main/res/layout-land/news_text.xml" value="0.1609347442680776" />
@@ -24,6 +25,7 @@
         <entry key="app/src/main/res/layout/news_text.xml" value="0.25" />
         <entry key="app/src/main/res/layout/single_news_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/splash.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/toast_poor_connection.xml" value="0.19010416666666666" />
       </map>
     </option>
   </component>

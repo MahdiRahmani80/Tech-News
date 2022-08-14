@@ -1,5 +1,6 @@
 package com.MehdiRahmani.TecNews.Home
 
+import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.RelativeLayout
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.MehdiRahmani.TecNews.Home.HorizontalRecyclerAdapter.ViewHolder
 import com.MehdiRahmani.TecNews.Main.mainViewModel
@@ -39,6 +41,7 @@ class HorizontalRecyclerAdapter(private val newsList: List<Articles>) : Recycler
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun showNews(holder: ViewHolder, position: Int) {
 
         var disc = newsList[position].description

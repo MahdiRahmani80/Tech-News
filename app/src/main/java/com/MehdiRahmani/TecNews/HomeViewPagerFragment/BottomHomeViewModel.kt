@@ -1,6 +1,8 @@
 package com.MehdiRahmani.TecNews.HomeViewPagerFragment
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,6 +16,7 @@ import retrofit2.Response
 
 class BottomHomeViewModel: ViewModel() {
 
+
     private var isLoginCreated = false
     private var tabName:String? =null
     private var pos:Int? = null
@@ -22,7 +25,8 @@ class BottomHomeViewModel: ViewModel() {
         MutableLiveData<List<Articles>>()
     }
 
-    fun getNews(position:Int,tab:String): LiveData<List<Articles>> {
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun getNews(position:Int, tab:String): LiveData<List<Articles>> {
         tabName=tab
         pos=position
 
@@ -43,6 +47,7 @@ class BottomHomeViewModel: ViewModel() {
         return news
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun getNewsFromDB() {
         if(tabName != null) {
             val service = APIClient().serviceAPI().getCompanyNews(tabName!!,mainViewModel!!.get_api_key())
@@ -56,7 +61,7 @@ class BottomHomeViewModel: ViewModel() {
                 }
 
                 override fun onFailure(call: Call<News>?, t: Throwable?) {
-                    TODO("Not yet implemented")
+                    getNews(pos!!,tabName!!)
                 }
             })
         }

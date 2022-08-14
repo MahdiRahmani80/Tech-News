@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity() {
         addFR!!.observe(this, Observer<Fragment> { fragment ->
             if (fragment != null) {
                 addFragment(fragment)
-//                addFR.postValue(null)
             }
         })
 

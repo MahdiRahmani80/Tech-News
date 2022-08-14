@@ -1,9 +1,11 @@
 package com.MehdiRahmani.TecNews.HomeViewPagerFragment
 
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.MehdiRahmani.TecNews.HomeViewPagerFragment.BottomAdapter.*
 import com.MehdiRahmani.TecNews.Main.mainViewModel
@@ -37,6 +39,7 @@ class BottomAdapter(private val newsList:List<Articles>):
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun showNews(holder: ViewHolder, position: Int) {
 
         var disc = newsList[position].description
