@@ -1,8 +1,12 @@
 package com.MehdiRahmani.TecNews.SingleNewsPage
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import android.net.ConnectivityManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,14 +14,19 @@ import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.ImageView
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import com.MehdiRahmani.TecNews.Main.mainViewModel
 import com.MehdiRahmani.TecNews.Model.Articles
 import com.MehdiRahmani.TecNews.R
 import com.bumptech.glide.Glide
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import org.jsoup.Jsoup
 import java.net.HttpURLConnection
 import java.net.URL
@@ -25,6 +34,11 @@ import java.net.URL
 class SingleNewsFragment : Fragment() {
 
     var article: Articles? = null
+    private var newsTitle: AppCompatTextView? = null
+    private var newsText: AppCompatTextView? = null
+    private var fab: ExtendedFloatingActionButton? = null
+    private var newsIMG: ImageView? = null
+    private var conn: ConnectivityManager? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,18 +49,18 @@ class SingleNewsFragment : Fragment() {
         return inflater.inflate(R.layout.single_news_fragment, container, false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         cast(view)
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun cast(view: View) {
-        val newsIMG: ImageView = view.findViewById(R.id.img_news)
-        val newsTitle: AppCompatTextView = view.findViewById(R.id.single_news_title)
-        val newsText: AppCompatTextView = view.findViewById(R.id.main_news)
-
-        val fab: ExtendedFloatingActionButton = view.findViewById(R.id.EFAB_single_news)
+        newsIMG = view.findViewById(R.id.img_news)
+        newsTitle = view.findViewById(R.id.single_news_title)
+        newsText = view.findViewById(R.id.main_news)
+        fab = view.findViewById(R.id.EFAB_single_news)
 
 
         val viewModel: NewsPageViewModel by viewModels()
@@ -55,13 +69,30 @@ class SingleNewsFragment : Fragment() {
             viewModel.get_news().postValue(article)
         }
 
+        showContent(viewModel)
+    }
+
+    @SuppressLint("SetTextI18n")
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun showContent(viewModel: NewsPageViewModel) {
+
         viewModel.get_news().observe(viewLifecycleOwner) { data ->
 
-            newsTitle.text = data!!.title
-            fabOnClick(data, fab)
-            Thread { setText(newsText, data.url) }.start()
-
-            showImage(data, newsIMG, this)
+            showImage(data, newsIMG!!, this)
+            newsTitle!!.text = data!!.title
+            fabOnClick(data, fab!!, viewModel)
+            Thread {
+                val conn =
+                    requireActivity().getSystemService(AppCompatActivity.CONNECTIVITY_SERVICE) as ConnectivityManager
+                if (mainViewModel!!.isInternetDisconnect(conn))
+                    setText(newsText!!, data.url)
+                else if (fab != null) {
+                    fab!!.text = "Retry"
+                    newsText!!.post {
+                        poorNetworkSnack(viewModel)
+                    }
+                }
+            }.start()
         }
     }
 
@@ -70,7 +101,7 @@ class SingleNewsFragment : Fragment() {
         val url = URL(u)
         val urlConnection = url.openConnection() as HttpURLConnection
         urlConnection.usingProxy()
-        var text = "News details not found , you can click on 'GO TO WEBSITE'"
+        var text: String
 
 
         try {
@@ -80,21 +111,47 @@ class SingleNewsFragment : Fragment() {
         } finally {
             urlConnection.disconnect()
         }
-
-
         newsText.post {
             newsText.text = text
         }
     }
 
-
-    private fun fabOnClick(data: Articles, fab: ExtendedFloatingActionButton) {
+    @SuppressLint("SetTextI18n")
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun fabOnClick(
+        data: Articles,
+        fab: ExtendedFloatingActionButton,
+        viewModel: NewsPageViewModel
+    ) {
         fab.setOnClickListener {
 
-            //  GO TO WEB BROWSER
-            val openUrl = Intent(Intent.ACTION_VIEW)
-            openUrl.data = Uri.parse(data.url)
-            startActivity(openUrl)
+            if (!mainViewModel!!.isInternetDisconnect(conn!!)) {
+                //  GO TO WEB BROWSER
+                val openUrl = Intent(Intent.ACTION_VIEW)
+                openUrl.data = Uri.parse(data.url)
+                startActivity(openUrl)
+            } else {
+                showContent(viewModel)
+            }
+            fab.text = "Go To Website"
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun poorNetworkSnack(viewModel: NewsPageViewModel) {
+        conn =
+            requireActivity().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (!mainViewModel!!.isInternetDisconnect(conn!!)) {
+
+            val snack: ConstraintLayout? = activity?.findViewById(R.id.main)
+            val snackBar =
+                Snackbar.make(snack!!, "Check your network connection", Snackbar.LENGTH_SHORT)
+            snackBar.setAction("Retry") {
+                showContent(viewModel)
+            }
+            snackBar.show()
+
+
         }
     }
 
@@ -116,6 +173,5 @@ class SingleNewsFragment : Fragment() {
 
         }
     }
-
 
 }
