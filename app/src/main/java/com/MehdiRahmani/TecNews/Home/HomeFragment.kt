@@ -100,11 +100,13 @@ class HomeFragment : Fragment() {
         viewModel.getTabs().observe(viewLifecycleOwner, Observer<List<String>> { data ->
 
 //            SET ADAPTER
-            viewPager.adapter = ViewPagerAdapter(requireActivity(), data)
+            if (this != null) {
+                viewPager.adapter = ViewPagerAdapter(requireActivity(), data)
 
-            TabLayoutMediator(tabLayout!!, viewPager) { tab, position ->
-                tab.text = data[position]
-            }.attach()
+                TabLayoutMediator(tabLayout!!, viewPager) { tab, position ->
+                    tab.text = data[position]
+                }.attach()
+            }
 
         })
 

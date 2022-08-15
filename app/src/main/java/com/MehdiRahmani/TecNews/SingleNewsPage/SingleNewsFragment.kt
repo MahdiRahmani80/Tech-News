@@ -8,6 +8,7 @@ import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.MehdiRahmani.TecNews.Main.mainViewModel
 import com.MehdiRahmani.TecNews.Model.Articles
@@ -27,6 +29,8 @@ import com.MehdiRahmani.TecNews.R
 import com.bumptech.glide.Glide
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
 import java.net.HttpURLConnection
 import java.net.URL
@@ -72,7 +76,6 @@ class SingleNewsFragment : Fragment() {
         showContent(viewModel)
     }
 
-    @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.M)
     private fun showContent(viewModel: NewsPageViewModel) {
 
@@ -85,11 +88,16 @@ class SingleNewsFragment : Fragment() {
                 val conn =
                     requireActivity().getSystemService(AppCompatActivity.CONNECTIVITY_SERVICE) as ConnectivityManager
                 if (mainViewModel!!.isInternetDisconnect(conn))
-                    setText(newsText!!, data.url)
+                    lifecycleScope.launchWhenCreated {
+                        withContext(Dispatchers.IO) {
+                            setText(newsText!!, data.url)
+                        }
+                    }
                 else if (fab != null) {
-                    fab!!.text = "Retry"
                     newsText!!.post {
                         poorNetworkSnack(viewModel)
+                        fab!!.text = "Retry"
+                        fab!!.gravity = Gravity.CENTER
                     }
                 }
             }.start()
@@ -105,9 +113,9 @@ class SingleNewsFragment : Fragment() {
 
 
         try {
-            text = urlConnection.inputStream.bufferedReader().readText()
+            text = urlConnection.inputStream.bufferedReader().readText().replace("<[^>]*>"," ")
             if (text.isNotEmpty())
-                text = Jsoup.parse(text).normalise().text()
+                text = Jsoup.parse(text).text()
         } finally {
             urlConnection.disconnect()
         }
