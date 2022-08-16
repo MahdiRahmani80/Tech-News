@@ -6,25 +6,32 @@ import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import androidx.viewpager2.widget.ViewPager2
+import com.MehdiRahmani.TecNews.Main.mainViewModel
 import com.MehdiRahmani.TecNews.Model.Articles
 import com.MehdiRahmani.TecNews.Model.News
 import com.MehdiRahmani.TecNews.R
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
-var changeMoodButton:ExtendedFloatingActionButton? = null
+var changeMoodButton: ExtendedFloatingActionButton? = null
+
 class HomeFragment : Fragment() {
 
     private var tabLayout: TabLayout? = null
@@ -45,8 +52,28 @@ class HomeFragment : Fragment() {
         mkHorizontalRecycler(view, viewModel)
         mkTabLayout(view.context, view, viewModel)
         setTheme(view)
-//        TODO => add search
+        search(view, viewModel)
+    }
 
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun search(view: View, vm: HomeViewModel) {
+        val search: TextInputEditText = view.findViewById(R.id.et_search)
+
+        search.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+
+                hideSoftKeyboard()
+                vm.search(search.text.toString())
+                    .observe(requireActivity(), Observer<List<Articles>> { data ->
+
+                        if (data != null)
+                            mainViewModel!!.setSearchNews(data)
+                    })
+                return@OnEditorActionListener true
+            }
+            false
+        })
+        vm.search(search.text.toString())
     }
 
     private fun setTheme(v: View) {
@@ -66,7 +93,8 @@ class HomeFragment : Fragment() {
 
 
         changeMoodButton!!.setOnClickListener {
-            val isNight2 = Configuration.UI_MODE_NIGHT_MASK + v.context.resources.configuration.uiMode
+            val isNight2 =
+                Configuration.UI_MODE_NIGHT_MASK + v.context.resources.configuration.uiMode
             when (isNight2) {
                 81 -> {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -113,5 +141,9 @@ class HomeFragment : Fragment() {
 
     }
 
+    fun hideSoftKeyboard(){
+        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm?.hideSoftInputFromWindow(view?.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+    }
 }
 

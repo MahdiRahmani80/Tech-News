@@ -40,8 +40,6 @@ class MainActivity : AppCompatActivity() {
                 addFragment(fragment)
             }
         })
-
-
     }
 
 
@@ -55,13 +53,9 @@ class MainActivity : AppCompatActivity() {
     private fun addFragment(fr: Fragment) {
         supportFragmentManager.beginTransaction()
             .add(R.id.frame_layout, fr)
-            .addToBackStack("single_news")
+            .addToBackStack("getting fragment")
             .commit()
     }
 
-    override fun onBackPressed() {
 
-        if(addFR !== null) addFR!!.postValue(null)
-        super.onBackPressed()
-    }
 }

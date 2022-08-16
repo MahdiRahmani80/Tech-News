@@ -27,6 +27,34 @@ class HomeViewModel : ViewModel() {
             tab_data = mkTabTitles()
         }
     }
+    private val searchNews: MutableLiveData<List<Articles>> by lazy {
+        MutableLiveData<List<Articles>>()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun search(text: String): LiveData<List<Articles>> {
+        getNews(text)
+        return searchNews
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun getNews(text: String) {
+        val service =
+            APIClient().serviceAPI().getCompanyNews(text, mainViewModel!!.get_api_key())
+
+        service.enqueue(object : Callback<News> {
+            override fun onResponse(call: Call<News>?, response: Response<News>?) {
+                if (response?.body() != null && response.isSuccessful) {
+                    searchNews.postValue(response.body().articles)
+                }
+            }
+
+            override fun onFailure(call: Call<News>?, t: Throwable?) {
+
+            }
+        })
+
+    }
 
     fun getTabs(): LiveData<List<String>> {
         tab_title.postValue(tab_data)
@@ -72,7 +100,7 @@ class HomeViewModel : ViewModel() {
 
 
     @RequiresApi(Build.VERSION_CODES.M)
-    private fun sendRequest(){
+    private fun sendRequest() {
         val service = APIClient().serviceAPI().getTOPNews(mainViewModel!!.get_api_key())
         try {
             service.enqueue(object : Callback<News> {

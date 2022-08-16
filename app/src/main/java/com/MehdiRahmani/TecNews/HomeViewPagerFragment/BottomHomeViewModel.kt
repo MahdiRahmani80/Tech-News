@@ -55,7 +55,6 @@ class BottomHomeViewModel: ViewModel() {
             service.enqueue(object : Callback<News>{
                 override fun onResponse(call: Call<News>?, response: Response<News>?) {
                     if(response?.body() != null && response.isSuccessful){
-                        Log.d("RETD","${response.body()}")
                         news.postValue(response.body().articles)
                     }
                 }

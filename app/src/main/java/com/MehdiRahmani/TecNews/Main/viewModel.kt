@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel
 import com.MehdiRahmani.TecNews.Home.HomeFragment
 import com.MehdiRahmani.TecNews.Model.Articles
 import com.MehdiRahmani.TecNews.NoInternetConn.NoInternetConnFragment
+import com.MehdiRahmani.TecNews.SearchFragment.SearchFragment
 import com.MehdiRahmani.TecNews.SingleNewsPage.SingleNewsFragment
 import java.util.*
 import kotlin.concurrent.schedule
@@ -35,7 +36,7 @@ class MainViewModel : ViewModel() {
         return fr
     }
 
-    fun setHomeFragment(){
+    fun setHomeFragment() {
         fr.postValue(HomeFragment())
     }
 
@@ -46,6 +47,11 @@ class MainViewModel : ViewModel() {
         go_news_single.postValue(singleNews)
     }
 
+    fun setSearchNews(article: List<Articles>) {
+        val searchFr = SearchFragment()
+        searchFr.newsList =article
+        go_news_single.postValue(searchFr)
+    }
 
     @RequiresApi(Build.VERSION_CODES.M)
     private fun loadFragment() {
