@@ -4,7 +4,7 @@ Find the latest news
 
 ## Installation
 
-You can click this [Link](https://github.com/MahdiRahmani80/Tech-News/blob/main/app/release/app-release.apk/) to install TechNews.
+You can click this [Link](https://github.com/MahdiRahmani80/Tech-News/raw/main/app/release/app-release.apk) to install TechNews.
 
 ## Usage
 
