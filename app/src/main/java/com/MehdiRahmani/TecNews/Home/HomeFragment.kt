@@ -80,6 +80,7 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+
     }
 
     @RequiresApi(Build.VERSION_CODES.M)

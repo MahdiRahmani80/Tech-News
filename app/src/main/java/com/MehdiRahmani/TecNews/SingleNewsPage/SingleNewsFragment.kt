@@ -4,10 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import android.graphics.drawable.Drawable
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -27,11 +29,16 @@ import com.MehdiRahmani.TecNews.Main.mainViewModel
 import com.MehdiRahmani.TecNews.Model.Articles
 import com.MehdiRahmani.TecNews.R
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
+import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
 
@@ -106,21 +113,26 @@ class SingleNewsFragment : Fragment() {
 
     private fun setText(newsText: AppCompatTextView, u: String) {
 
-        val url = URL(u)
-        val urlConnection = url.openConnection() as HttpURLConnection
-        urlConnection.usingProxy()
-        var text: String
-
-
         try {
-            text = urlConnection.inputStream.bufferedReader().readText().replace("<[^>]*>"," ")
-            if (text.isNotEmpty())
-                text = Jsoup.parse(text).text()
-        } finally {
+            val url = URL(u)
+            val urlConnection = url.openConnection() as HttpURLConnection
+            var text: String
+            if (urlConnection.responseCode == 200) {
+                text = urlConnection.inputStream.bufferedReader().readText().replace("<[^>]*>", " ")
+                if (text.isNotEmpty()) {
+                    text = Jsoup.parse(text).text()
+                    newsText.post {
+                        newsText.text = text
+                    }
+                }
+            }
             urlConnection.disconnect()
-        }
-        newsText.post {
-            newsText.text = text
+
+        } catch (e: IOException) {
+            Log.e("Err_getURL",e.toString())
+            newsText.post {
+                newsText.text = "We have a problem getting data, you can visit the main website"
+            }
         }
     }
 
@@ -177,6 +189,28 @@ class SingleNewsFragment : Fragment() {
                 .load(data.urlToImage)
                 .placeholder(circularProgressDrawable)
                 .override(MATCH_PARENT, WRAP_CONTENT)
+                .error(R.drawable.toast)
+                .listener(object : RequestListener<Drawable>{
+                    override fun onLoadFailed(
+                        e: GlideException?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        return false
+                    }
+
+                    override fun onResourceReady(
+                        resource: Drawable?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        dataSource: DataSource?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        return false
+                    }
+
+                })
                 .into(imageView)
 
         }
